@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import com.firebase.client.*;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -12,12 +12,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Firebase
-        Firebase.setAndroidContext(this);
-        Firebase myFirebaseRef = new Firebase("https://shared-space.firebaseio.com/");
-        myFirebaseRef.child("message").setValue("Do you have data? You'll love Firebase.");
-
-        System.out.println("Hello World");
     }
 
     @Override
