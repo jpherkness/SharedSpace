@@ -113,12 +113,12 @@ public class Event {
         // Store the event in the database under a unique identifier (push generates that uid)
         Firebase newEventRef = ref.child("events").push();
         newEventRef.setValue(event);
-        String uid = newEventRef.getKey();
+        String eventID = newEventRef.getKey();
 
         // Store the location in the database using the same identifier as the event
-        GeoFire geoFire = new GeoFire(ref.child("geofire"));
-        geoFire.setLocation(uid, location);
-
+        Firebase newGeoFireRef = ref.child("geofire");
+        GeoFire geoFire = new GeoFire(newGeoFireRef);
+        geoFire.setLocation(eventID, location);
 
     }
 }
