@@ -2,6 +2,7 @@ package edu.oakland.sharedspace;
 
 import android.app.Application;
 
+import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
 
 /**
@@ -21,6 +22,23 @@ public class ApplicationController extends Application {
 
         //Do Application initialization over here
         Firebase.setAndroidContext(this);
+
+        Firebase ref = new Firebase("https://shared-space.firebaseio.com");
+
+        //Listens to changes in the authentication state
+        ref.addAuthStateListener(new Firebase.AuthStateListener() {
+
+            //This will be called whenever the authentication state changes
+            @Override
+            public void onAuthStateChanged(AuthData authData) {
+                if (authData != null) {
+                    // user is logged in
+                } else {
+                    // user is not logged in
+                }
+            }
+        });
+
     }
     //Appplication wide methods
 }
