@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.firebase.geofire.GeoLocation;
+
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
@@ -14,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Event.addEvent("Study Sesh", "We gonna study! :D", Calendar.getInstance().getTime());
+        Event.addEvent("Study Sesh", "We gonna study! :D", Calendar.getInstance().getTime(), new GeoLocation(1,1));
     }
 
     @Override

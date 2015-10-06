@@ -1,6 +1,8 @@
 package edu.oakland.sharedspace;
 
 import com.firebase.client.Firebase;
+import com.firebase.geofire.GeoFire;
+import com.firebase.geofire.GeoLocation;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -84,8 +86,23 @@ public class Event {
 
     /**
      * Probably a temporary method that provides the ability to easily add events.
+     *
+     * Here is a data tree showing how the event information is actually stored in the database
+     *
+     *  ┌── events
+     *  │   └── eventID          <- unique event ID
+     *  │       ├── title
+     *  │       ├── description
+     *  │       └── date
+     *  ├── geofire
+     *  │   ├── eventID          <- unique event ID
+     *  │   │   ├── g            <- encoded geofire data
+     *  │   │   └── l
+     *  │   │       ├── 0        <- latitude
+     *  │   │       └── 1        <- longitude
+     *  │   └── bar
      */
-    public static void addEvent(String title, String description, Date date){
+    public static void addEvent(String title, String description, Date date, GeoLocation location){
 
         // Create a reference to the firebase application
         Firebase ref = new Firebase("https://shared-space.firebaseio.com");
@@ -93,7 +110,15 @@ public class Event {
         // Create a event object
         Event event = new Event(title, description, date);
 
-        // Store the event in the database under a unique identifier
-        ref.child("events").push().setValue(event);
+        // Store the event in the database under a unique identifier (push generates that uid)
+        Firebase newEventRef = ref.child("events").push();
+        newEventRef.setValue(event);
+        String uid = newEventRef.getKey();
+
+        // Store the location in the database using the same identifier as the event
+        GeoFire geoFire = new GeoFire(ref.child("geofire"));
+        geoFire.setLocation(uid, location);
+
+
     }
 }
