@@ -97,8 +97,8 @@
     <orderEntry type="library" exported="" name="appcompat-v7-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="tubesock-0.0.12" level="project" />
     <orderEntry type="library" exported="" name="jackson-annotations-2.2.2" level="project" />
-    <orderEntry type="library" exported="" name="firebase-client-android-2.3.1" level="project" />
     <orderEntry type="library" exported="" name="firebase-client-jvm-2.4.0" level="project" />
+    <orderEntry type="library" exported="" name="firebase-client-android-2.3.1" level="project" />
     <orderEntry type="library" exported="" name="support-v4-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="geofire-1.1.0" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-23.0.1" level="project" />

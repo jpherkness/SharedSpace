@@ -27,6 +27,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        // Set the title of the activity
+        setTitle("Sign up for Shared Space");
+
         // Get our views from their ids
         etFirstNameSignUp = (EditText) findViewById(R.id.etFirstNameSignUp);
         etLastNameSignUp = (EditText) findViewById(R.id.etLastNameSignUp);
