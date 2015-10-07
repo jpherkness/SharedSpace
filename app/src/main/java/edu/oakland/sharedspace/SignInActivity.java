@@ -23,6 +23,9 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
+        // Set the title of the activity
+        setTitle("Sign in to Shared Space");
+
         // Get our views from their ids
         etEmail = (EditText) findViewById(R.id.etEmailSignIn);
         etPassword = (EditText) findViewById(R.id.etPasswordSignIn);
