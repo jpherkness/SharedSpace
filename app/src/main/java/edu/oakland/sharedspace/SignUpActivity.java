@@ -12,6 +12,12 @@ import com.firebase.client.FirebaseError;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The SignUpActivity will register a new user, then authenticate that user so that they can access our database.
+ *
+ * @author      Joseph Herkness
+ * @version     1.0 October 9, 2015
+ */
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener{
 
     final Firebase ref = new Firebase("https://shared-space.firebaseio.com");
@@ -46,16 +52,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         switch(v.getId()) {
             case R.id.btnSignUp:
 
-                //Get the email and password that the user entered
+                // Get the email and password the user entered
                 String email = etEmailSignUp.getText().toString();
                 String password = etPasswordSignUp.getText().toString();
 
-                //Create a user with that email and password
+                // Create a user with that email and password
                 ref.createUser(email, password, new Firebase.ValueResultHandler<Map<String, Object>>() {
                     @Override
                     public void onSuccess(Map<String, Object> result) {
-                        // User creation completed successfully :)
-                        //Add the user to the tree
+                        // User was created
                         String userID = result.get("uid").toString();
                         String firstName = etFirstNameSignUp.getText().toString();
                         String lastName = etLastNameSignUp.getText().toString();
@@ -68,7 +73,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     }
                     @Override
                     public void onError(FirebaseError firebaseError) {
-                        // Something went wrong :(
+                        // Something went wrong, user was not created
                     }
                 });
 

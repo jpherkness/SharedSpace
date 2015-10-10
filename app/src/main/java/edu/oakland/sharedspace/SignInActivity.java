@@ -11,6 +11,12 @@ import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
+/**
+ * The SignInActivity will authenticate the user so that they can access our database.
+ *
+ * @author      Joseph Herkness
+ * @version     1.0 October 9, 2015
+ */
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener{
 
     final Firebase ref = new Firebase("https://shared-space.firebaseio.com");
@@ -49,11 +55,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 ref.authWithPassword(email, password, new Firebase.AuthResultHandler() {
                     @Override
                     public void onAuthenticated(AuthData authData) {
-                        // Authentication just completed successfully :)
+                        // User was authenticated
                     }
                     @Override
                     public void onAuthenticationError(FirebaseError error) {
-                        // Something went wrong :(
+                        // Something went wrong, user was not authenticated
                     }
                 });
 
