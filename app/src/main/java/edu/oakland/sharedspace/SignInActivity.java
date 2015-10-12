@@ -21,6 +21,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     final Firebase ref = new Firebase("https://shared-space.firebaseio.com");
 
+    Intent onAuthenticate;
+
     EditText etEmail, etPassword;
     Button btnSignIn, etCreateAccount;
 
@@ -28,6 +30,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
+        onAuthenticate = new Intent(this, CreateEventActivity.class);
 
         // Set the title of the activity
         setTitle("Sign in to Shared Space");
@@ -56,19 +60,22 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onAuthenticated(AuthData authData) {
                         // User was authenticated
+
+                        startActivity(onAuthenticate);
                     }
+
                     @Override
                     public void onAuthenticationError(FirebaseError error) {
                         // Something went wrong, user was not authenticated
                     }
                 });
 
+
                 break;
 
             case R.id.btnCreateAccount:
 
-                Intent intent = new Intent("edu.oakland.sharedspace.SIGN_UP");
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                Intent intent = new Intent(this, SignUpActivity.class);
                 startActivity(intent);
 
                 break;

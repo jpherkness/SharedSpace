@@ -14,6 +14,10 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="title_activity_sign_up">SignUp</string>
+    <string name="first_name_prompt">First Name</string>
+    <string name="last_name_prompt">Last Name</string>
+    <string name="name_prompt">Name</string>
+    <string name="title_activity_sign_up">Sign up for Shared Space</string>
+    <string name="title_activity_create_event">Create Event</string>
 
 </resources>
