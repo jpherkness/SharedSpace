@@ -30,7 +30,7 @@
         <!-- Sign In Activity -->
         <activity
             android:name=".SignInActivity"
-            android:label="@string/title_activity_login" >
+            android:label="@string/title_activity_sign_in" >
             <intent-filter>
                 <action android:name="edu.oakland.sharedspace.SIGN_IN" />
                 <category android:name="android.intent.category.DEFAULT" />

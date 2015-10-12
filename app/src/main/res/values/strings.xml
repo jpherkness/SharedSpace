@@ -1,23 +1,22 @@
 <resources>
     <string name="app_name">Shared Space</string>
-    <string name="title_activity_login">Sign in</string>
 
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
-    <string name="first_name_prompt">First Name</string>
-    <string name="last_name_prompt">Last Name</string>
-    <string name="name_prompt">Name</string>
+    <!-- Strings related to Authentication -->
+    <string name="title_activity_sign_in">Sign in</string>
     <string name="title_activity_sign_up">Sign up for Shared Space</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_first_name">First Name</string>
+    <string name="prompt_last_name">Last Name</string>
+    <string name="prompt_full_name">Name</string>
+    <string name="action_sign_up">Sign Up</string>
+    <string name="action_sign_in">Sign In</string>
+    <string name="action_create_account">Create a free account</string>
+    <string name="action_sign_out">Sign Out</string>
+
+    <!-- Strings related to Events -->
     <string name="title_activity_create_event">Create Event</string>
+    <string name="event_title_prompt">Title</string>
+    <string name="event_description_prompt">Description</string>
 
 </resources>

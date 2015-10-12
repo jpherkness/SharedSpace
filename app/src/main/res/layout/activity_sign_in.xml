@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:hint="Email"
+        android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"/>
 
     <EditText
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:hint="Password"
+        android:hint="@string/prompt_password"
         android:inputType="textPassword"/>
 
     <LinearLayout
@@ -31,14 +31,14 @@
             android:id="@+id/btnCreateAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Create free account"
+            android:text="@string/action_create_account"
             android:layout_weight="1"/>
 
         <Button
             android:id="@+id/btnSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign In"
+            android:text="@string/action_sign_in"
             android:layout_weight="2"/>
 
     </LinearLayout>
