@@ -20,4 +20,5 @@
     <string name="event_description_prompt">Description</string>
     <string name="title_activity_maps">Events</string>
     <string name="action_create_event">Create Event</string>
+    <string name="action_select_location">Select Location</string>
 </resources>

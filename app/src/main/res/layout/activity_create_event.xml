@@ -23,10 +23,24 @@
         android:hint="@string/event_title_prompt"/>
 
     <EditText
+        android:id="@+id/etDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/etTitle"
         android:hint="@string/event_description_prompt"/>
+
+    <Button
+        android:id="@+id/btnSelectLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etDescription"
+        android:text="@string/action_select_location"/>
+
+    <TextView
+        android:id="@+id/tvLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnSelectLocation"/>
 
     <Button
         android:id="@+id/btnCreateEvent"
