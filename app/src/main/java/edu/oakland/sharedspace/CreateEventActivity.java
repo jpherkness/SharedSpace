@@ -20,8 +20,9 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_create_event);
 
         btnSignOut = (Button)findViewById(R.id.btnSignOut);
-
         btnSignOut.setOnClickListener(this);
+
+
     }
 
     @Override

@@ -24,14 +24,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     final Firebase ref = new Firebase("https://shared-space.firebaseio.com");
 
-    EditText etFirstNameSignUp, etLastNameSignUp, etEmailSignUp, etPasswordSignUp;
-    Button btnSignUp;
+    private EditText etFirstNameSignUp, etLastNameSignUp, etEmailSignUp, etPasswordSignUp;
+    private Button btnSignUp;
 
-    String uid;
-    String email;
-    String password;
+    private String uid;
+    private String email;
+    private String password;
 
-    Intent onAuthenticate;
+    private Intent onAuthenticate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

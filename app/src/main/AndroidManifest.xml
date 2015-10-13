@@ -3,11 +3,10 @@
     package="edu.oakland.sharedspace" >
 
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".ApplicationController"
@@ -16,13 +15,20 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
 
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
         <!-- Main Activity -->
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
+
                 <uses-permission android:name="android.permission.INTERNET" />
             </intent-filter>
         </activity>
@@ -33,6 +39,7 @@
             android:label="@string/title_activity_sign_in" >
             <intent-filter>
                 <action android:name="edu.oakland.sharedspace.SIGN_IN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -43,17 +50,26 @@
             android:label="@string/title_activity_sign_up" >
             <intent-filter>
                 <action android:name="edu.oakland.sharedspace.SIGN_UP" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
         <!-- Create Event Activity -->
-        <activity android:name=".CreateEventActivity"
+        <activity
+            android:name=".CreateEventActivity"
             android:label="@string/title_activity_create_event" >
             <intent-filter>
                 <action android:name="edu.oakland.sharedspace.Create_Event" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps" >
+
         </activity>
     </application>
 

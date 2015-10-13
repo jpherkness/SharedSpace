@@ -21,10 +21,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     final Firebase ref = new Firebase("https://shared-space.firebaseio.com");
 
-    Intent onAuthenticate;
+    private Intent onAuthenticate;
 
-    EditText etEmail, etPassword;
-    Button btnSignIn, etCreateAccount;
+    private EditText etEmail, etPassword;
+    private Button btnSignIn, etCreateAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
