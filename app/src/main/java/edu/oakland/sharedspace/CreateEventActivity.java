@@ -29,8 +29,8 @@ public class CreateEventActivity extends AppCompatActivity{
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
             new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
 
-    private Button btnSignOut, btnCreateEvent, btnSelectLocation;
-    private EditText etTitle, etDescription;
+    private Button btnSignOut, btnCreateEvent;
+    private EditText etTitle, etDescription, etLocation;
     private TextView tvLocation;
 
     private LatLng eventLocation;
@@ -54,8 +54,8 @@ public class CreateEventActivity extends AppCompatActivity{
             }
         });
 
-        btnSelectLocation = (Button)findViewById(R.id.btnSelectLocation);
-        btnSelectLocation.setOnClickListener(new View.OnClickListener() {
+        etLocation = (EditText)findViewById(R.id.etLocation);
+        etLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -99,7 +99,7 @@ public class CreateEventActivity extends AppCompatActivity{
 
             eventLocation = place.getLatLng();
             final CharSequence name = place.getName();
-            tvLocation.setText(name);
+            etLocation.setText(name);
 
         } else {
             super.onActivityResult(requestCode, resultCode, data);

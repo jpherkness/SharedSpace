@@ -18,6 +18,7 @@
     <string name="title_activity_create_event">Create Event</string>
     <string name="event_title_prompt">Title</string>
     <string name="event_description_prompt">Description</string>
+    <string name="event_location_prompt">Location</string>
     <string name="title_activity_maps">Events</string>
     <string name="action_create_event">Create Event</string>
     <string name="action_select_location">Select Location</string>

@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:text="@string/action_sign_out"/>
+        android:text="@string/action_sign_out" />
 
     <EditText
         android:id="@+id/etTitle"
@@ -29,18 +29,14 @@
         android:layout_below="@+id/etTitle"
         android:hint="@string/event_description_prompt"/>
 
-    <Button
-        android:id="@+id/btnSelectLocation"
-        android:layout_width="match_parent"
+    <EditText android:id="@+id/etLocation"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/etDescription"
-        android:text="@string/action_select_location"/>
-
-    <TextView
-        android:id="@+id/tvLocation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btnSelectLocation"/>
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:clickable="true"
+        android:hint="@string/event_location_prompt"/>
 
     <Button
         android:id="@+id/btnCreateEvent"
