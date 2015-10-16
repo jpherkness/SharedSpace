@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:text="@string/action_sign_out" />
+        android:text="@string/action_sign_out"
+        android:onClick="signOut"/>
 
     <EditText
         android:id="@+id/etTitle"
@@ -43,7 +44,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="@string/action_create_event"/>
+        android:text="@string/action_create_event"
+        android:onClick="createEvent"/>
 
 
 </RelativeLayout>
