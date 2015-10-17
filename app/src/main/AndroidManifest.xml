@@ -36,7 +36,8 @@
         <!-- Sign In Activity -->
         <activity
             android:name=".SignInActivity"
-            android:label="@string/title_activity_sign_in" >
+            android:label="@string/title_activity_sign_in"
+            android:theme="@style/AppTheme" >
             <intent-filter>
                 <action android:name="edu.oakland.sharedspace.SIGN_IN" />
 

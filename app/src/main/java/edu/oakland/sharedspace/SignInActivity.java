@@ -17,13 +17,13 @@ import com.firebase.client.FirebaseError;
  * @author      Joseph Herkness
  * @version     1.0 October 9, 2015
  */
-public class SignInActivity extends AppCompatActivity implements View.OnClickListener{
+public class SignInActivity extends AppCompatActivity {
 
     final Firebase ref = new Firebase("https://shared-space.firebaseio.com");
 
     private Intent onAuthenticate;
 
-    private EditText etEmail, etPassword;
+    private EditText etEmailSignIn, etPasswordSignIn;
     private Button btnSignIn, etCreateAccount;
 
     @Override
@@ -33,53 +33,46 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
         onAuthenticate = new Intent(this, CreateEventActivity.class);
 
-        // Set the title of the activity
-        setTitle("Sign in to Shared Space");
-
         // Get our views from their ids
-        etEmail = (EditText) findViewById(R.id.etEmailSignIn);
-        etPassword = (EditText) findViewById(R.id.etPasswordSignIn);
+        etEmailSignIn = (EditText) findViewById(R.id.etEmailSignIn);
+        etPasswordSignIn = (EditText) findViewById(R.id.etPasswordSignIn);
         btnSignIn = (Button) findViewById(R.id.btnSignIn);
         etCreateAccount = (Button) findViewById(R.id.btnCreateAccount);
-
-        btnSignIn.setOnClickListener(this);
-        etCreateAccount.setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.btnSignIn:
+    public void signIn(View view) {
 
-                //Retrieve the email and password that the user entered
-                String email = etEmail.getText().toString();
-                String password = etPassword.getText().toString();
+        //Retrieve the email and password that the user entered
+        String email = etEmailSignIn.getText().toString();
+        String password = etPasswordSignIn.getText().toString();
 
-                // Send Authentication request
-                ref.authWithPassword(email, password, new Firebase.AuthResultHandler() {
-                    @Override
-                    public void onAuthenticated(AuthData authData) {
-                        // User was authenticated
+        // Send Authentication request
+        ref.authWithPassword(email, password, new Firebase.AuthResultHandler() {
+            @Override
+            public void onAuthenticated(AuthData authData) {
+                startActivity(onAuthenticate);
+            }
 
-                        startActivity(onAuthenticate);
-                    }
+            @Override
+            public void onAuthenticationError(FirebaseError firebaseError) {
+                switch (firebaseError.getCode()){
+                    case FirebaseError.INVALID_EMAIL:
+                        etEmailSignIn.setError(getResources().getString(R.string.err_email_does_not_exist));
+                        break;
+                    case FirebaseError.INVALID_PASSWORD:
+                        etPasswordSignIn.setError(getResources().getString(R.string.err_incorrect_password));
+                        break;
+                }
+            }
+        });
 
-                    @Override
-                    public void onAuthenticationError(FirebaseError error) {
-                        // Something went wrong, user was not authenticated
-                    }
-                });
+    }
 
+    public void createAccount(View view) {
 
-                break;
+        Intent intent = new Intent(this, SignUpActivity.class);
+        startActivity(intent);
 
-            case R.id.btnCreateAccount:
-
-                Intent intent = new Intent(this, SignUpActivity.class);
-                startActivity(intent);
-
-                break;
-        }
     }
 }
 

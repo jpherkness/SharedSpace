@@ -79,21 +79,30 @@ public class CreateEventActivity extends AppCompatActivity{
     }
 
     public void createEvent(View view) {
-        // Retrieve information about event
-        String title = etTitle.getText().toString();
-        String description = etDescription.getText().toString();
-
-        // Check to make sure the event information is valid and create the event if it is
-        if(eventLocation != null && title.length() > 0){
+        // Create a new event if the input is valid
+        if(isInputValid()){
+            String title = etTitle.getText().toString();
+            String description = etDescription.getText().toString();
             GeoLocation location = new GeoLocation(eventLocation.latitude, eventLocation.longitude);
+
             Event.addEvent(title, description, Calendar.getInstance().getTime(), location);
-        }else{
-            if(eventLocation == null){
-                etLocation.setError("You must enter a valid location");
-            }
-            if(title.length() == 0){
-                etTitle.setError("You must enter a valid title");
-            }
         }
+    }
+
+    public boolean isInputValid(){
+        Boolean valid = true;
+
+        if(eventLocation == null){
+            etLocation.setError(getResources().getString(R.string.err_invalid_location));
+            valid = false;
+        }
+
+        String title = etTitle.getText().toString();
+        if(title.length() == 0){
+            etTitle.setError(getResources().getString(R.string.err_invalid_title));
+            valid = false;
+        }
+
+        return valid;
     }
 }

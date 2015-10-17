@@ -8,29 +8,22 @@
     android:orientation="vertical"
     tools:context="edu.oakland.sharedspace.CreateEventActivity">
 
-    <Button
-        android:id="@+id/btnSignOut"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:text="@string/action_sign_out"
-        android:onClick="signOut"/>
-
-    <EditText
+    <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/etTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnSignOut"
+        android:layout_alignParentTop="true"
         android:hint="@string/event_title_prompt"/>
 
-    <EditText
+    <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/etDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/etTitle"
         android:hint="@string/event_description_prompt"/>
 
-    <EditText android:id="@+id/etLocation"
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/etLocation"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/etDescription"
@@ -43,9 +36,16 @@
         android:id="@+id/btnCreateEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/btnSignOut"
         android:text="@string/action_create_event"
         android:onClick="createEvent"/>
 
+    <Button
+        android:id="@+id/btnSignOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/action_sign_out"
+        android:onClick="signOut" />
 
 </RelativeLayout>

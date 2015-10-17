@@ -11,8 +11,12 @@
     <string name="prompt_full_name">Name</string>
     <string name="action_sign_up">Sign Up</string>
     <string name="action_sign_in">Sign In</string>
-    <string name="action_create_account">Create a free account</string>
+    <string name="action_create_account">Create an Account</string>
     <string name="action_sign_out">Sign Out</string>
+
+    <string name="err_email_taken">Email Taken</string>
+    <string name="err_email_does_not_exist">Email Does Not Exist</string>
+    <string name="err_incorrect_password">Incorrect Password</string>
 
     <!-- Strings related to Events -->
     <string name="title_activity_create_event">Create Event</string>
@@ -22,4 +26,7 @@
     <string name="title_activity_maps">Events</string>
     <string name="action_create_event">Create Event</string>
     <string name="action_select_location">Select Location</string>
+
+    <string name="err_invalid_location">Invalid Location</string>
+    <string name="err_invalid_title">Invalid Title</string>
 </resources>
