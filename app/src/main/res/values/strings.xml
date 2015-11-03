@@ -29,4 +29,6 @@
 
     <string name="err_invalid_location">Invalid Location</string>
     <string name="err_invalid_title">Invalid Title</string>
+    <string name="title_activity_main_event">Events</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>

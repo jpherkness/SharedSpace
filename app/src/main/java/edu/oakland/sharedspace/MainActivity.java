@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         AuthData authData = ref.getAuth();
         if (authData != null) {
             // user authenticated
-            Intent intent = new Intent(this, CreateEventActivity.class);
+            Intent intent = new Intent(this, MainEventActivity.class);
             startActivity(intent);
         } else {
             // no user authenticated

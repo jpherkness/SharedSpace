@@ -37,7 +37,7 @@ public class SignUpActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        onAuthenticate = new Intent(this, CreateEventActivity.class);
+        onAuthenticate = new Intent(this, MainEventActivity.class);
 
         // Get our views from their ids
         etFirstNameSignUp = (EditText) findViewById(R.id.etFirstNameSignUp);
