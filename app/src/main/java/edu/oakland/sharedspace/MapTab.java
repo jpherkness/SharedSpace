@@ -14,7 +14,7 @@ public class MapTab extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.tab_map,container,false);
+        View v =inflater.inflate(R.layout.map_fragment,container,false);
         return v;
     }
 }

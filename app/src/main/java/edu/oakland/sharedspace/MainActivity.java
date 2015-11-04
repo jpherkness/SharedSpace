@@ -31,10 +31,12 @@ public class MainActivity extends AppCompatActivity {
             // user authenticated
             Intent intent = new Intent(this, MainEventActivity.class);
             startActivity(intent);
+            finish();
         } else {
             // no user authenticated
             Intent intent = new Intent(this, SignInActivity.class);
             startActivity(intent);
+            finish();
         }
 
         //This is a temporary testing method that adds an event to the database
