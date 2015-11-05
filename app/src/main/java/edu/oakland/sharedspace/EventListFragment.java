@@ -6,9 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class MapFragment extends Fragment{
 
-    public MapFragment() {
+public class EventListFragment extends Fragment{
+
+    public EventListFragment() {
         // Required empty public constructor
     }
 
@@ -20,6 +21,7 @@ public class MapFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.map_fragment, container, false);
+        return inflater.inflate(R.layout.list_fragment, container, false);
     }
+
 }

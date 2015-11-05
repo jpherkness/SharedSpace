@@ -35,8 +35,8 @@ public class MainEventActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new MapFragment(), "Map");
-        adapter.addFragment(new ListFragment(), "List");
+        adapter.addFragment(new EventMapFragment(), "Map");
+        adapter.addFragment(new EventListFragment(), "List");
         viewPager.setAdapter(adapter);
     }
 
