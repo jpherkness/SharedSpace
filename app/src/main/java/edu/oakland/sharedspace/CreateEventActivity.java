@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -51,6 +52,9 @@ public class CreateEventActivity extends AppCompatActivity{
                 }
             }
         });
+
+        // Adds a back button the the action bar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -66,16 +70,6 @@ public class CreateEventActivity extends AppCompatActivity{
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
-    }
-
-    public void signOut(View view) {
-
-        // Un-authenticate the user
-        ref.unauth();
-
-        // Show sign in activity
-        Intent signIn = new Intent(this, SignInActivity.class);
-        startActivity(signIn);
     }
 
     public void createEvent(View view) {
@@ -104,5 +98,16 @@ public class CreateEventActivity extends AppCompatActivity{
         }
 
         return valid;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

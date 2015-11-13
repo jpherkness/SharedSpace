@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,21 +7,29 @@
     android:padding="10dp"
     tools:context="edu.oakland.sharedspace.SignInActivity">
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/etEmailSignIn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:hint="@string/prompt_email"
-        android:inputType="textEmailAddress"/>
+    <!-- Prevents the edittexts from auto focusing -->
+    <LinearLayout android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="0px"
+        android:layout_height="0px" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/etPasswordSignIn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:hint="@string/prompt_password"
-        android:inputType="textPassword"/>
+            android:id="@+id/etEmailSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="@string/hint_email"
+            android:inputType="textEmailAddress"
+            app:met_iconLeft="@drawable/ic_email"/>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/etPasswordSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="@string/hint_password"
+            android:inputType="textPassword"
+            app:met_iconLeft="@drawable/ic_lock"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,6 +40,7 @@
             android:id="@+id/btnCreateAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:height="60dp"
             android:text="@string/action_create_account"
             android:onClick="createAccount"
             android:layout_weight="1"/>
@@ -39,6 +49,7 @@
             android:id="@+id/btnSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:height="60dp"
             android:text="@string/action_sign_in"
             android:onClick="signIn"
             android:layout_weight="1"/>

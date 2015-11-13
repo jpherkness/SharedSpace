@@ -3,6 +3,7 @@ package edu.oakland.sharedspace;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,6 +45,9 @@ public class SignUpActivity extends AppCompatActivity{
         etLastNameSignUp = (EditText) findViewById(R.id.etLastNameSignUp);
         etEmailSignUp = (EditText) findViewById(R.id.etEmailSignUp);
         etPasswordSignUp = (EditText) findViewById(R.id.etPasswordSignUp);
+
+        // Adds a back button the the action bar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void signUp(View view) {
@@ -73,6 +77,7 @@ public class SignUpActivity extends AppCompatActivity{
                         ref.child("users").child(userID).setValue(map);
 
                         startActivity(onAuthenticate);
+                        finish();
                     }
 
                     @Override
@@ -83,9 +88,10 @@ public class SignUpActivity extends AppCompatActivity{
                     }
                 });
             }
+
             @Override
             public void onError(FirebaseError firebaseError) {
-                switch (firebaseError.getCode()){
+                switch (firebaseError.getCode()) {
                     case FirebaseError.EMAIL_TAKEN:
                         etEmailSignUp.setError(getResources().getString(R.string.err_email_taken));
                         break;
@@ -93,5 +99,16 @@ public class SignUpActivity extends AppCompatActivity{
             }
         });
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

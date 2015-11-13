@@ -3,12 +3,11 @@
 
     <!-- Strings related to Authentication -->
     <string name="title_activity_sign_in">Sign in</string>
-    <string name="title_activity_sign_up">Sign up for Shared Space</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="prompt_first_name">First Name</string>
-    <string name="prompt_last_name">Last Name</string>
-    <string name="prompt_full_name">Name</string>
+    <string name="title_activity_sign_up">Sign up</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_first_name">First</string>
+    <string name="hint_last_name">Last</string>
     <string name="action_sign_up">Sign Up</string>
     <string name="action_sign_in">Sign In</string>
     <string name="action_create_account">Create an Account</string>
@@ -20,9 +19,9 @@
 
     <!-- Strings related to Events -->
     <string name="title_activity_create_event">Create Event</string>
-    <string name="event_title_prompt">Title</string>
-    <string name="event_description_prompt">Description</string>
-    <string name="event_location_prompt">Location</string>
+    <string name="hint_event_title">Title</string>
+    <string name="hint_event_description">Description</string>
+    <string name="hint_event_location">Location</string>
     <string name="title_activity_maps">Events</string>
     <string name="action_create_event">Create Event</string>
     <string name="action_select_location">Select Location</string>
@@ -30,8 +29,4 @@
     <string name="err_invalid_location">Invalid Location</string>
     <string name="err_invalid_title">Invalid Title</string>
     <string name="title_activity_main_event">Events</string>
-    <string name="title_activity_main2">Main2Activity</string>
-
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

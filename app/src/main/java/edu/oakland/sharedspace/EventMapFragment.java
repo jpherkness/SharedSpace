@@ -7,10 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 
-public class EventMapFragment extends Fragment implements OnMapReadyCallback{
+public class EventMapFragment extends Fragment{
 
     private GoogleMap map;
     private SupportMapFragment mapFragment;
@@ -29,16 +28,10 @@ public class EventMapFragment extends Fragment implements OnMapReadyCallback{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.map_fragment, null, false);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.map_fragment);
-        mapFragment.getMapAsync(this);
+        mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.map_fragment);
+        map = mapFragment.getMap();
+        map.setMyLocationEnabled(true);
 
         return view;
-    }
-
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        map = googleMap;
-        map.setMyLocationEnabled(true);
     }
 }

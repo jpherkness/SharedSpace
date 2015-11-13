@@ -51,6 +51,7 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onAuthenticated(AuthData authData) {
                 startActivity(onAuthenticate);
+                finish();
             }
 
             @Override
