@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -8,12 +8,6 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context="edu.oakland.sharedspace.CreateEventActivity">
-
-    <!-- Prevents the edittexts from auto focusing -->
-    <LinearLayout android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:layout_width="0px"
-        android:layout_height="0px" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/etTitle"
@@ -45,9 +39,8 @@
         android:id="@+id/btnCreateEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:height="60dp"
         android:text="@string/action_create_event"
         android:onClick="createEvent"/>
 
-</RelativeLayout>
+</LinearLayout>

@@ -80,6 +80,7 @@ public class CreateEventActivity extends AppCompatActivity{
             GeoLocation location = new GeoLocation(eventLocation.latitude, eventLocation.longitude);
 
             Event.addEvent(title, description, Calendar.getInstance().getTime(), location);
+            finish();
         }
     }
 
