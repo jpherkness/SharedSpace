@@ -54,7 +54,9 @@ public class Event {
 
         this.title = title;
         this.description = description;
-        this.date = formatter.format(date);
+        if(date != null) {
+            this.date = formatter.format(date);
+        }
     }
 
     /**
