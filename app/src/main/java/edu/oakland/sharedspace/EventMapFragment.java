@@ -113,8 +113,8 @@ public class EventMapFragment extends Fragment implements
             Circle circle = map.addCircle(new CircleOptions()
                     .center(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()))
                     .radius(1000)
-                    .strokeColor(0xff188DE1)
-                    .fillColor(0x22188DE1)
+                    .strokeColor(0x55188DE1)
+                    .fillColor(0x11188DE1)
                     .strokeWidth(6.0f));
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(
                     new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()), 14.0f) );

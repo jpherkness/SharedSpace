@@ -10,6 +10,9 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
+        // Enabling multidex support.
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -27,11 +30,22 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.0.1'
-    compile 'com.android.support:design:23.0.1'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:design:23.1.1'
+
+    //Firebase Dependencies
     compile 'com.firebase:firebase-client-android:2.3.1'
-    compile 'com.firebase:firebase-ui:0.1.0'
     compile 'com.firebase:geofire:1.1.0'
-    compile 'com.google.android.gms:play-services:8.1.0'
+
+    //Google Play Services
+    compile 'com.google.android.gms:play-services-maps:8.3.0'
+    compile 'com.google.android.gms:play-services-location:8.3.0'
+
+    //Material Edit Text Dependency
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
+
+    repositories {
+        mavenCentral()
+    }
+    compile 'com.sothree.slidinguppanel:library:3.2.0'
 }

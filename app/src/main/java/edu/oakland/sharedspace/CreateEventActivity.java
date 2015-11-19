@@ -18,7 +18,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.util.Calendar;
 
-public class CreateEventActivity extends AppCompatActivity{
+public class CreateEventActivity extends AppCompatActivity implements View.OnClickListener{
 
     final Firebase ref = new Firebase("https://shared-space.firebaseio.com");
 
@@ -36,22 +36,7 @@ public class CreateEventActivity extends AppCompatActivity{
         etTitle = (EditText)findViewById(R.id.etTitle);
         etDescription = (EditText)findViewById(R.id.etDescription);
         etLocation = (EditText)findViewById(R.id.etLocation);
-        etLocation.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-
-                try {
-                    PlacePicker.IntentBuilder intentBuilder = new PlacePicker.IntentBuilder();
-                    Intent intent = intentBuilder.build(getApplicationContext());
-                    startActivityForResult(intent, PLACE_PICKER_REQUEST_CODE);
-                } catch (GooglePlayServicesRepairableException e) {
-                    e.printStackTrace();
-                } catch (GooglePlayServicesNotAvailableException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        etLocation.setOnClickListener(this);
 
         // Adds a back button the the action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -109,6 +94,25 @@ public class CreateEventActivity extends AppCompatActivity{
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.etLocation:
+
+                // Show Google Place Picker
+                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+                try {
+                    startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST_CODE);
+                } catch (GooglePlayServicesRepairableException e) {
+                    e.printStackTrace();
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    e.printStackTrace();
+                }
+
+                break;
         }
     }
 }
