@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/etTitle"
         android:hint="@string/hint_event_description"
-        app:met_iconLeft="@drawable/ic_description"/>
+        app:met_iconLeft="@drawable/ic_add_24dp"/>
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/etLocation"
@@ -33,7 +33,7 @@
         android:focusableInTouchMode="false"
         android:clickable="true"
         android:hint="@string/hint_event_location"
-        app:met_iconLeft="@drawable/ic_room"/>
+        app:met_iconLeft="@drawable/ic_place_24dp"/>
 
     <Button
         android:id="@+id/btnCreateEvent"

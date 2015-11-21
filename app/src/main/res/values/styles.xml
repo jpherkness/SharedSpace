@@ -3,12 +3,18 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="AppTheme.Base">
 
+        <item name="android:textColorPrimary">@color/primary_text_material_light</item>
     </style>
 
     <style name="AppTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- navigation icon color -->
+        <item name="colorControlNormal">#FFFFFFFF</item>
+        <!-- color of the menu overflow icon -->
+        <item name="android:textColorSecondary">#FFFFFFFF</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="AppTheme.Base">

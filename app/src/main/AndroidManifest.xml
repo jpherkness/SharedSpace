@@ -47,7 +47,8 @@
         <!-- Sign Up Activity -->
         <activity
             android:name=".SignUpActivity"
-            android:label="@string/title_activity_sign_up" >
+            android:label="@string/title_activity_sign_up"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="edu.oakland.sharedspace.SIGN_UP" />
 
