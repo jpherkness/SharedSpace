@@ -4,11 +4,9 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -54,8 +52,6 @@ public class MainEventActivity extends AppCompatActivity implements
     final Firebase ref = new Firebase("https://shared-space.firebaseio.com");
 
     private Toolbar toolbar;
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
     private ListView listView;
     private GoogleMap map;
     private SupportMapFragment mapFragment;
@@ -103,6 +99,7 @@ public class MainEventActivity extends AppCompatActivity implements
     }
 
     public void setup(){
+        events.clear();
         mLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLocation != null) {
             // setup GeoFire
@@ -112,12 +109,14 @@ public class MainEventActivity extends AppCompatActivity implements
             this.geoQuery.removeAllListeners();
             this.geoQuery.addGeoQueryEventListener(this);
 
-            this.circle = map.addCircle(new CircleOptions()
-                    .center(new LatLng(mLocation.getLatitude(), mLocation.getLongitude()))
-                    .radius(1608)
-                    .strokeColor(0xffF8B623)
-                    .fillColor(0x20F8B623)
-                    .strokeWidth(6.0f));
+            if(circle == null){
+                this.circle = map.addCircle(new CircleOptions()
+                        .center(new LatLng(mLocation.getLatitude(), mLocation.getLongitude()))
+                        .radius(1608)
+                        .strokeColor(0xffF8B623)
+                        .fillColor(0x20F8B623)
+                        .strokeWidth(6.0f));
+            }
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(
                     new LatLng(mLocation.getLatitude(), mLocation.getLongitude()), 14.0f));
         }
@@ -192,6 +191,7 @@ public class MainEventActivity extends AppCompatActivity implements
         eventRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
+                System.out.println("New Event Found");
                 Event event = snapshot.getValue(Event.class);
                 events.add(event);
                 marker.setTitle(event.getTitle());
@@ -202,7 +202,7 @@ public class MainEventActivity extends AppCompatActivity implements
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
-                // ignore
+
             }
         });
     }
@@ -272,7 +272,10 @@ public class MainEventActivity extends AppCompatActivity implements
     public void onPanelCollapsed(View panel) {}
 
     @Override
-    public void onPanelExpanded(View panel) {}
+    public void onPanelExpanded(View panel) {
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                new LatLng(mLocation.getLatitude(), mLocation.getLongitude()), 14.0f));
+    }
 
     @Override
     public void onPanelAnchored(View panel) {}

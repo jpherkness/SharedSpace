@@ -13,22 +13,21 @@
         android:id="@+id/etTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:hint="@string/hint_event_title"/>
+        android:hint="@string/hint_event_title"
+        android:inputType="textCapWords" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/etDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etTitle"
         android:hint="@string/hint_event_description"
-        app:met_iconLeft="@drawable/ic_add_24dp"/>
+        app:met_iconLeft="@drawable/ic_add_24dp"
+        android:inputType="textCapSentences" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/etLocation"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etDescription"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:clickable="true"

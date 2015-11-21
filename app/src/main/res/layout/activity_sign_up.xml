@@ -8,10 +8,6 @@
     tools:context="edu.oakland.sharedspace.SignUpActivity">
 
     <!-- Prevents the edittexts from auto focusing -->
-    <LinearLayout android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:layout_width="0px"
-        android:layout_height="0px" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:hint="@string/hint_first_name"
-                android:inputType="textPersonName"
+                android:inputType="textCapWords|textPersonName"
                 android:layout_weight="1"
                 app:met_iconLeft="@drawable/ic_person_24dp"/>
 
@@ -35,7 +31,7 @@
                 android:layout_marginBottom="10dp"
                 android:hint="@string/hint_last_name"
                 android:layout_weight="1"
-                android:inputType="textPersonName" />
+                android:inputType="textCapWords|textPersonName" />
 
     </LinearLayout>
 

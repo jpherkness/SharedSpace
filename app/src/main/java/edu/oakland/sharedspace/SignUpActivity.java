@@ -3,6 +3,7 @@ package edu.oakland.sharedspace;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +22,7 @@ import java.util.Map;
  * @author      Joseph Herkness
  * @version     1.0 October 9, 2015
  */
-public class SignUpActivity extends AppCompatActivity{
+public class SignUpActivity extends AppCompatActivity implements Firebase.AuthResultHandler{
 
     final Firebase ref = new Firebase("https://shared-space.firebaseio.com");
 
@@ -62,31 +63,7 @@ public class SignUpActivity extends AppCompatActivity{
             public void onSuccess(Map<String, Object> result) {
                 // Authenticate the user
                 uid = result.get("uid").toString();
-                ref.authWithPassword(email, password, new Firebase.AuthResultHandler() {
-                    @Override
-                    public void onAuthenticated(AuthData authData) {
-                        // Add the users information to the database
-                        String userID = uid;
-                        String firstName = etFirstNameSignUp.getText().toString();
-                        String lastName = etLastNameSignUp.getText().toString();
-
-                        Map<String, String> map = new HashMap<String, String>();
-                        map.put("first", firstName);
-                        map.put("last", lastName);
-
-                        ref.child("users").child(userID).setValue(map);
-
-                        startActivity(onAuthenticate);
-                        finish();
-                    }
-
-                    @Override
-                    public void onAuthenticationError(FirebaseError error) {
-                        // Something went wrong, user was not authenticated
-
-                        // We need to add some kind of popup or massage so the user knows the error
-                    }
-                });
+                ref.authWithPassword(email, password, SignUpActivity.this);
             }
 
             @Override
@@ -94,6 +71,7 @@ public class SignUpActivity extends AppCompatActivity{
                 switch (firebaseError.getCode()) {
                     case FirebaseError.EMAIL_TAKEN:
                         etEmailSignUp.setError(getResources().getString(R.string.err_email_taken));
+                        Log.e("Firebase Error", firebaseError.toString());
                         break;
                 }
             }
@@ -110,5 +88,29 @@ public class SignUpActivity extends AppCompatActivity{
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onAuthenticated(AuthData authData) {
+        // Add the users information to the database
+        String userID = uid;
+        String firstName = etFirstNameSignUp.getText().toString().substring(0, 1).toUpperCase()
+                + etFirstNameSignUp.getText().toString().substring(1);
+        String lastName = etLastNameSignUp.getText().toString().substring(0, 1).toUpperCase()
+                + etLastNameSignUp.getText().toString().substring(1);
+
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("first", firstName);
+        map.put("last", lastName);
+
+        ref.child("users").child(userID).setValue(map);
+
+        startActivity(onAuthenticate);
+        finish();
+    }
+
+    @Override
+    public void onAuthenticationError(FirebaseError firebaseError) {
+        Log.e("Firebase Error", firebaseError.toString());
     }
 }
