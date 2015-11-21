@@ -5,5 +5,9 @@
     <color name="textColorPrimary">#212121</color>
     <color name="windowBackground">#FFFFFF</color>
     <color name="navigationBarColor">#000000</color>
-    <color name="colorAccent">#448AFF</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="primary_text_material_light">#ffffff</color>
+
+    <color name="map_circle_stroke">#FF3F51B5</color>
+    <color name="map_circle_fill">#223F51B5</color>
 </resources>

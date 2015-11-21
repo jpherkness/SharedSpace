@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.firebase.client.Firebase;
+import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -17,6 +18,7 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class CreateEventActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -32,7 +34,6 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
-
         etTitle = (EditText)findViewById(R.id.etTitle);
         etDescription = (EditText)findViewById(R.id.etDescription);
         etLocation = (EditText)findViewById(R.id.etLocation);
@@ -64,7 +65,7 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
             String description = etDescription.getText().toString();
             GeoLocation location = new GeoLocation(eventLocation.latitude, eventLocation.longitude);
 
-            Event.addEvent(title, description, Calendar.getInstance().getTime(), location);
+            addEvent(title, description, Calendar.getInstance().getTime(), location);
             finish();
         }
     }
@@ -114,5 +115,43 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
 
                 break;
         }
+    }
+
+    /**
+     * Probably a temporary method that provides the ability to easily add events.
+     *
+     * Here is a data tree showing how the event information is actually stored in the database
+     *
+     *  ┌── events
+     *  │   └── eventID          <- unique event ID
+     *  │       ├── title
+     *  │       ├── description
+     *  │       └── date
+     *  ├── geofire
+     *  │   ├── eventID          <- unique event ID
+     *  │   │   ├── g            <- encoded geofire data
+     *  │   │   └── l
+     *  │   │       ├── 0        <- latitude
+     *  │   │       └── 1        <- longitude
+     *  │   └── bar
+     */
+    public static void addEvent(String title, String description, Date date, GeoLocation location){
+
+        // Create a reference to the firebase application
+        Firebase ref = new Firebase("https://shared-space.firebaseio.com");
+
+        // Create a event object
+        Event event = new Event(ref.getAuth().getUid(), title, description, date);
+
+        // Store the event in the database under a unique identifier (push generates that uid)
+        Firebase newEventRef = ref.child("events").push();
+        newEventRef.setValue(event);
+        String eventID = newEventRef.getKey();
+
+        // Store the location in the database using the same identifier as the event
+        Firebase newGeoFireRef = ref.child("geofire");
+        GeoFire geoFire = new GeoFire(newGeoFireRef);
+        geoFire.setLocation(eventID, location);
+
     }
 }
