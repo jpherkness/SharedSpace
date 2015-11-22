@@ -38,6 +38,11 @@ public class Event {
     private String date;
 
     /**
+     * Counter for number of people interested
+     */
+    private int interested = 0;
+
+    /**
      * Class constructor.
      */
     public Event(){
@@ -97,5 +102,12 @@ public class Event {
      */
     public String getDate(){
         return date;
+    }
+
+    public void interestCounter(boolean button) {
+        if(button)
+            interested++;
+        else
+            interested--;
     }
 }
