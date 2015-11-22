@@ -36,6 +36,11 @@ public class Event {
     private String date;
 
     /**
+     * Counter for number of people interested
+     */
+    private int interested = 0;
+
+    /**
      * Class constructor.
      */
     public Event(){
@@ -122,5 +127,12 @@ public class Event {
         GeoFire geoFire = new GeoFire(newGeoFireRef);
         geoFire.setLocation(eventID, location);
 
+    }
+
+    public void interestCounter(boolean button) {
+        if(button)
+            interested++;
+        else
+            interested--;
     }
 }
