@@ -1,11 +1,14 @@
 package edu.oakland.sharedspace;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.firebase.client.Firebase;
@@ -20,14 +23,16 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.Calendar;
 import java.util.Date;
 
-public class CreateEventActivity extends AppCompatActivity implements View.OnClickListener{
+public class CreateEventActivity extends AppCompatActivity implements
+        View.OnClickListener,
+        DatePickerDialog.OnDateSetListener{
 
     final Firebase ref = new Firebase("https://shared-space.firebaseio.com");
 
     private static final int PLACE_PICKER_REQUEST_CODE = 1;
 
-    private EditText etTitle, etDescription, etLocation;
-
+    private EditText etTitle, etDescription, etLocation, etDate;
+    private Date date;
     private LatLng eventLocation;
 
     @Override
@@ -38,6 +43,8 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
         etDescription = (EditText)findViewById(R.id.etDescription);
         etLocation = (EditText)findViewById(R.id.etLocation);
         etLocation.setOnClickListener(this);
+        etDate = (EditText) findViewById(R.id.etFromDate);
+        etDate.setOnClickListener(this);
 
         // Adds a back button the the action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -114,6 +121,9 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
                 }
 
                 break;
+            case R.id.etFromDate:
+                pickDate();
+                break;
         }
     }
 
@@ -152,6 +162,18 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
         Firebase newGeoFireRef = ref.child("geofire");
         GeoFire geoFire = new GeoFire(newGeoFireRef);
         geoFire.setLocation(eventID, location);
+
+        date.setTime(SystemClock.currentThreadTimeMillis());
+
+    }
+
+    public void pickDate(){
+        DatePickerDialog datePicker = new DatePickerDialog(this, R.style.AppTheme_DialogTheme ,this, 2015, 11, 21);
+        datePicker.show();
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
     }
 }

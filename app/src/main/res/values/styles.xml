@@ -2,7 +2,6 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="AppTheme.Base">
-
         <item name="android:textColorPrimary">@color/primary_text_material_light</item>
     </style>
 
@@ -21,6 +20,15 @@
     <style name="AppTheme.NoActionBar" parent="AppTheme.Base">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- Styles for pop-up dialogs -->
+    <style name="AppTheme.DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
