@@ -47,8 +47,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="68dp"
                 android:orientation="horizontal"
-                android:background="#f3f3f3"
-                />
+                android:background="#f3f3f3">
+
+                <TextView
+                    android:id="@+id/btnForgetPassword"
+                    android:text="@string/hint_pull_up"
+                    android:textColor="@color/darkGrey"
+                    android:textSize="@dimen/button_font_size"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:background="#00000000"
+                    android:gravity="center_vertical|center_horizontal" />
+
+            </LinearLayout>
 
             <ListView
                 android:id="@+id/eventListView"

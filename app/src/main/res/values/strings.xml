@@ -12,6 +12,7 @@
     <string name="action_sign_in">Sign In</string>
     <string name="action_create_account">Create an Account</string>
     <string name="action_sign_out">Sign Out</string>
+    <string name="action_forget_password">Forget your password?</string>
 
     <string name="err_email_taken">Email Taken</string>
     <string name="err_email_does_not_exist">Email Does Not Exist</string>
@@ -29,5 +30,6 @@
     <string name="err_invalid_location">Invalid Location</string>
     <string name="err_invalid_title">Invalid Title</string>
     <string name="title_activity_main_event">Events</string>
-    <string name="action_forget_password">Forget your password?</string>
+
+    <string name="hint_pull_up">Pull up to reveal list</string>
 </resources>
