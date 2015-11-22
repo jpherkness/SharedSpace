@@ -37,7 +37,7 @@ public class SignInActivity extends AppCompatActivity {
         etEmailSignIn = (EditText) findViewById(R.id.etEmailSignIn);
         etPasswordSignIn = (EditText) findViewById(R.id.etPasswordSignIn);
         btnSignIn = (Button) findViewById(R.id.btnSignIn);
-        etCreateAccount = (Button) findViewById(R.id.btnCreateAccount);
+        etCreateAccount = (Button) findViewById(R.id.btnSignUp);
     }
 
     public void signIn(View view) {
@@ -69,7 +69,7 @@ public class SignInActivity extends AppCompatActivity {
 
     }
 
-    public void createAccount(View view) {
+    public void signUp(View view) {
 
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);

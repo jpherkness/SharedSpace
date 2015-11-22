@@ -1,6 +1,7 @@
 package edu.oakland.sharedspace;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ public class EventListAdapter extends ArrayAdapter<Event>{
 
         TextView title = (TextView) convertView.findViewById(R.id.eventTitleTextView);
         title.setText(getItem(position).getTitle());
+        title.setTextColor(Color.BLACK);
 
         return convertView;
     }

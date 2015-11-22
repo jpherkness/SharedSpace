@@ -37,9 +37,12 @@
     <Button
         android:id="@+id/btnCreateEvent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:height="60dp"
+        android:layout_height="@dimen/button_height"
+        android:textSize="@dimen/button_font_size"
+        android:textColor="@color/white"
         android:text="@string/action_create_event"
-        android:onClick="createEvent"/>
+        android:onClick="createEvent"
+        android:background="@drawable/button_rounded_primary"
+        android:stateListAnimator="@null"/>
 
 </LinearLayout>

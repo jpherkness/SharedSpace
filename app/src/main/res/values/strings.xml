@@ -29,4 +29,5 @@
     <string name="err_invalid_location">Invalid Location</string>
     <string name="err_invalid_title">Invalid Title</string>
     <string name="title_activity_main_event">Events</string>
+    <string name="action_forget_password">Forget your password?</string>
 </resources>

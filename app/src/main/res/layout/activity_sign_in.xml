@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context="edu.oakland.sharedspace.SignInActivity">
+    tools:context="edu.oakland.sharedspace.SignInActivity"
+    android:background="#ffffff"
+    android:clickable="true">
 
     <!-- Prevents the edittexts from auto focusing -->
 
@@ -30,26 +32,43 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:dividerPadding="0dp">
 
         <Button
-            android:id="@+id/btnCreateAccount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:height="60dp"
-            android:text="@string/action_create_account"
-            android:onClick="createAccount"
-            android:layout_weight="1"/>
+            android:id="@+id/btnSignUp"
+            android:text="Sign Up"
+            android:textColor="@color/darkGrey"
+            android:textSize="@dimen/button_font_size"
+            android:layout_height="@dimen/button_height"
+            android:layout_weight="1"
+            android:background="@drawable/button_rounded_grey"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="10dp"
+            android:onClick="signUp"
+            android:stateListAnimator="@null"/>
 
         <Button
             android:id="@+id/btnSignIn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:height="60dp"
             android:text="@string/action_sign_in"
+            android:textColor="@color/white"
+            android:textSize="@dimen/button_font_size"
+            android:layout_height="@dimen/button_height"
+            android:layout_weight="1"
+            android:background="@drawable/button_rounded_primary"
+            android:layout_width="wrap_content"
             android:onClick="signIn"
-            android:layout_weight="1"/>
+            android:stateListAnimator="@null"/>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/btnForgetPassword"
+        android:text="@string/action_forget_password"
+        android:textColor="@color/darkGrey"
+        android:textSize="@dimen/button_font_size"
+        android:layout_height="@dimen/button_height"
+        android:layout_width="match_parent"
+        android:background="#00000000"
+        android:gravity="center_vertical|center_horizontal" />
 
 </LinearLayout>

@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,6 +28,7 @@ import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -47,11 +48,11 @@ public class MainEventActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         GeoQueryEventListener,
-        SlidingUpPanelLayout.PanelSlideListener{
+        SlidingUpPanelLayout.PanelSlideListener,
+        LocationListener{
 
     final Firebase ref = new Firebase("https://shared-space.firebaseio.com");
 
-    private Toolbar toolbar;
     private ListView listView;
     private GoogleMap map;
     private SupportMapFragment mapFragment;
@@ -74,17 +75,6 @@ public class MainEventActivity extends AppCompatActivity implements
         // Set up the google API client
         buildGoogleApiClient();
 
-        // Action Bar
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        //Sliding Up Panel Layout
-        slidingUpPanel = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
-        slidingUpPanel.setAnchorPoint(0.6f);
-        slidingUpPanel.setClickable(true);
-        slidingUpPanel.setPanelSlideListener(this);
-        slidingUpPanel.isClipPanel();
-
         // List View
         listView = (ListView) findViewById(R.id.eventListView);
 
@@ -95,6 +85,16 @@ public class MainEventActivity extends AppCompatActivity implements
 
         // Geofire
         geoFire = new GeoFire(new Firebase("https://shared-space.firebaseio.com/geofire"));
+
+        //Sliding Up Panel Layout
+        slidingUpPanel = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
+        slidingUpPanel.setAnchorPoint(0.6f);
+        slidingUpPanel.setClickable(true);
+        slidingUpPanel.setPanelSlideListener(this);
+
+        //DisplayMetrics dm = new DisplayMetrics();
+        //getWindowManager().getDefaultDisplay().getMetrics(dm);
+        //slidingUpPanel.setParallaxOffset(dm.heightPixels/2);
 
     }
 
@@ -113,9 +113,9 @@ public class MainEventActivity extends AppCompatActivity implements
                 this.circle = map.addCircle(new CircleOptions()
                         .center(new LatLng(mLocation.getLatitude(), mLocation.getLongitude()))
                         .radius(1608)
-                        .strokeColor(0xffF8B623)
-                        .fillColor(0x20F8B623)
-                        .strokeWidth(6.0f));
+                        .strokeColor(ContextCompat.getColor(this, R.color.map_circle_stroke))
+                        .fillColor(ContextCompat.getColor(this, R.color.map_circle_fill))
+                        .strokeWidth(5.0f));
             }
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(
                     new LatLng(mLocation.getLatitude(), mLocation.getLongitude()), 14.0f));
@@ -191,7 +191,6 @@ public class MainEventActivity extends AppCompatActivity implements
         eventRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                System.out.println("New Event Found");
                 Event event = snapshot.getValue(Event.class);
                 events.add(event);
                 marker.setTitle(event.getTitle());
@@ -259,7 +258,9 @@ public class MainEventActivity extends AppCompatActivity implements
         mGoogleApiClient.disconnect();
 
         // remove all event listeners to stop updating in the background
-        this.geoQuery.removeAllListeners();
+        if(this.geoQuery != null){
+            this.geoQuery.removeAllListeners();
+        }
     }
 
     @Override
@@ -273,8 +274,6 @@ public class MainEventActivity extends AppCompatActivity implements
 
     @Override
     public void onPanelExpanded(View panel) {
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                new LatLng(mLocation.getLatitude(), mLocation.getLongitude()), 14.0f));
     }
 
     @Override
@@ -282,6 +281,11 @@ public class MainEventActivity extends AppCompatActivity implements
 
     @Override
     public void onPanelHidden(View panel) {}
+
+    @Override
+    public void onLocationChanged(Location location) {
+        setup();
+    }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();

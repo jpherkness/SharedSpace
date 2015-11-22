@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+
+    <color name="colorPrimary">#0ABB78</color>
+    <color name="colorPrimaryDark">#09A86C</color>
     <color name="textColorPrimary">#212121</color>
     <color name="windowBackground">#FFFFFF</color>
-    <color name="navigationBarColor">#000000</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="primary_text_material_light">#ffffff</color>
+    <color name="colorAccent">#0ABB78</color>
+    <color name="primary_text_material_light">#373737</color>
 
-    <color name="map_circle_stroke">#FF3F51B5</color>
-    <color name="map_circle_fill">#223F51B5</color>
+    <color name="white">#ffffff</color>
+    <color name="lightGrey">#ebebeb</color>
+    <color name="darkGrey">#313131</color>
+
+    <color name="map_circle_stroke">#0ABB78</color>
+    <color name="map_circle_fill">#220ABB78</color>
 </resources>

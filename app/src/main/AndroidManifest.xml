@@ -71,7 +71,7 @@
         <activity
             android:name=".MainEventActivity"
             android:label="@string/title_activity_main_event"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme" >
             <intent-filter>
                 <action android:name="edu.oakland.sharedspace.Main_Event" />
 

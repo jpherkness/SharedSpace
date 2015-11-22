@@ -57,9 +57,12 @@
     <Button
         android:id="@+id/btnSignUp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:height="60dp"
+        android:layout_height="@dimen/button_height"
+        android:textSize="@dimen/button_font_size"
         android:text="@string/action_sign_up"
-        android:onClick="signUp"/>
+        android:onClick="signUp"
+        android:background="@drawable/button_rounded_primary"
+        android:textColor="@color/white"
+        android:stateListAnimator="@null"/>
 
 </LinearLayout>
