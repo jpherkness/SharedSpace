@@ -33,8 +33,6 @@
 
     <string name="hint_pull_up">Pull up to reveal list</string>
 
-    <string name="hint_event_from_date">From Date</string>
-    <string name="hint_event_from_time">From Time</string>
-    <string name="hint_event_to_time">To Time</string>
-    <string name="hint_event_to_date">To Date</string>
+    <string name="hint_event_date">Date</string>
+    <string name="hint_event_time">Time</string>
 </resources>

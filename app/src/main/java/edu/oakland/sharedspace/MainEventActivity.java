@@ -1,12 +1,8 @@
 package edu.oakland.sharedspace;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -28,7 +24,6 @@ import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -42,14 +37,12 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class MainEventActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         GeoQueryEventListener,
-        SlidingUpPanelLayout.PanelSlideListener,
-        LocationListener{
+        SlidingUpPanelLayout.PanelSlideListener{
 
     final Firebase ref = new Firebase("https://shared-space.firebaseio.com");
 
@@ -66,6 +59,7 @@ public class MainEventActivity extends AppCompatActivity implements
     private Circle circle;
     private HashMap<String, Marker> markers = new HashMap<>();
     private ArrayList<Event> events = new ArrayList<>();
+    private Marker mMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,14 +85,11 @@ public class MainEventActivity extends AppCompatActivity implements
         slidingUpPanel.setAnchorPoint(0.6f);
         slidingUpPanel.setClickable(true);
         slidingUpPanel.setPanelSlideListener(this);
-
-        //DisplayMetrics dm = new DisplayMetrics();
-        //getWindowManager().getDefaultDisplay().getMetrics(dm);
-        //slidingUpPanel.setParallaxOffset(dm.heightPixels/2);
-
     }
 
-    public void setup(){
+    public void update(){
+        map.clear();
+
         events.clear();
         mLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLocation != null) {
@@ -164,7 +155,7 @@ public class MainEventActivity extends AppCompatActivity implements
     @Override
     public void onConnected(Bundle bundle) {
         Log.d("GoogleApiClient", "Google API Client connected");
-        setup();
+        update();
     }
 
     //GoogleApiClient method that is invoked when the client's connection is suspended
@@ -232,12 +223,7 @@ public class MainEventActivity extends AppCompatActivity implements
     //GeoQuery method that is invoked when there is an error with the query
     @Override
     public void onGeoQueryError(FirebaseError error) {
-        new AlertDialog.Builder(this)
-                .setTitle("Error")
-                .setMessage("There was an unexpected error querying GeoFire: " + error.getMessage())
-                .setPositiveButton(android.R.string.ok, null)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
+        Log.d("Firebase Error", error.toString());
     }
 
     @Override
@@ -282,37 +268,4 @@ public class MainEventActivity extends AppCompatActivity implements
     @Override
     public void onPanelHidden(View panel) {}
 
-    @Override
-    public void onLocationChanged(Location location) {
-        setup();
-    }
-
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-    }
 }

@@ -9,26 +9,22 @@
     android:orientation="vertical"
     tools:context="edu.oakland.sharedspace.CreateEventActivity">
 
-    <com.rengwuxian.materialedittext.MaterialEditText
+    <EditText
         android:id="@+id/etTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/hint_event_title"
         android:inputType="textCapWords"
-        app:met_floatingLabel="highlight"
-        app:met_hideUnderline="true"/>
+        android:textColorHint="@color/editTextHintColor"/>
 
-    <com.rengwuxian.materialedittext.MaterialEditText
+    <EditText
         android:id="@+id/etDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/hint_event_description"
-        app:met_iconLeft="@drawable/ic_add_24dp"
-        app:met_floatingLabel="highlight"
-        android:inputType="textMultiLine|textCapSentences"
-        app:met_hideUnderline="true"/>
+        android:textColorHint="@color/editTextHintColor"/>
 
-    <com.rengwuxian.materialedittext.MaterialEditText
+    <EditText
         android:id="@+id/etLocation"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -36,69 +32,108 @@
         android:focusableInTouchMode="false"
         android:clickable="true"
         android:hint="@string/hint_event_location"
-        app:met_iconLeft="@drawable/ic_place_24dp"
-        app:met_floatingLabel="highlight"
-        app:met_hideUnderline="true"/>
+        android:textColorHint="@color/editTextHintColor"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <EditText
             android:id="@+id/etFromDate"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:clickable="true"
-            android:hint="@string/hint_event_from_date"
-            app:met_iconLeft="@drawable/ic_place_24dp"
-            app:met_floatingLabel="highlight"
-            app:met_hideUnderline="true"
-            android:layout_weight="1"/>
-        <com.rengwuxian.materialedittext.MaterialEditText
+            android:hint="@string/hint_event_date"
+            android:layout_weight="1"
+            android:textColorHint="@color/editTextHintColor"/>
+        <EditText
             android:id="@+id/etFromTime"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:clickable="true"
-            android:hint="@string/hint_event_from_time"
-            app:met_iconLeft="@drawable/ic_place_24dp"
-            app:met_floatingLabel="highlight"
-            app:met_hideUnderline="true"
-            android:layout_weight="1"/>
+            android:hint="@string/hint_event_time"
+            android:layout_weight="1"
+            android:textColorHint="@color/editTextHintColor" />
 
     </LinearLayout>
 
-    <LinearLayout
+    <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/etToDate"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:clickable="true"
-            android:hint="@string/hint_event_to_date"
-            app:met_iconLeft="@drawable/ic_place_24dp"
-            app:met_floatingLabel="highlight"
-            app:met_hideUnderline="true"
-            android:layout_weight="1"/>
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/etToTime"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:clickable="true"
-            android:hint="@string/hint_event_to_time"
-            app:met_iconLeft="@drawable/ic_place_24dp"
-            app:met_floatingLabel="highlight"
-            app:met_hideUnderline="true"
-            android:layout_weight="1"/>
+        android:layout_height="wrap_content"
+        android:id="@+id/horizontalScrollView"
+        android:layout_gravity="center_horizontal" >
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <edu.oakland.sharedspace.TagButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:colorActive="@color/shoppingTagColor"
+                app:colorDeactive="@color/lightGrey"
+                android:src="@drawable/ic_shopping_24dp"
+                android:tint="#ffffff"
+                android:padding="16dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp" />
+            <edu.oakland.sharedspace.TagButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:colorActive="@color/educationTagColor"
+                app:colorDeactive="@color/lightGrey"
+                android:src="@drawable/ic_school_24dp"
+                android:tint="#ffffff"
+                android:padding="16dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp" />
+            <edu.oakland.sharedspace.TagButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:colorActive="@color/sportsTagColor"
+                app:colorDeactive="@color/lightGrey"
+                android:src="@drawable/ic_football_24dp"
+                android:tint="#ffffff"
+                android:padding="16dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp" />
+            <edu.oakland.sharedspace.TagButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:colorActive="@color/artTagColor"
+                app:colorDeactive="@color/lightGrey"
+                android:src="@drawable/ic_brush_24dp"
+                android:tint="#ffffff"
+                android:padding="16dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp" />
+            <edu.oakland.sharedspace.TagButton
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:colorActive="@color/musicTagColor"
+                app:colorDeactive="@color/lightGrey"
+                android:src="@drawable/ic_music_24dp"
+                android:tint="#ffffff"
+                android:padding="16dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp" />
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
 
     <Button
         android:id="@+id/btnCreateEvent"
@@ -109,7 +144,5 @@
         android:text="@string/action_create_event"
         android:onClick="createEvent"
         android:background="@drawable/button_rounded_primary"
-        android:stateListAnimator="@null"
-        android:layout_marginTop="20dp" />
-
+        android:stateListAnimator="@null" />
 </LinearLayout>
