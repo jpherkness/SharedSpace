@@ -14,8 +14,6 @@ import java.util.Date;
  * @version     1.0 October 4, 2015
  */
 public class Event implements Serializable {
-    private static Event event;
-
     private final String DATE_STRING_FORMAT = "EEEE, MMM dd, yyyy HH:mm:ss";
 
     /**
