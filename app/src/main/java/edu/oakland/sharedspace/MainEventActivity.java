@@ -39,6 +39,14 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * The MainEventActivity class is the main view of the application
+ * and contains/shows local events based on the users current
+ * location.
+ *
+ * @author      Joseph Herkness
+ * @version     1.0 November 12, 2015
+ */
 public class MainEventActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -46,22 +54,23 @@ public class MainEventActivity extends AppCompatActivity implements
         SlidingUpPanelLayout.PanelSlideListener,
         AdapterView.OnItemClickListener{
 
+    // Firebase Reference
     final Firebase ref = new Firebase("https://shared-space.firebaseio.com");
 
-    private ListView listView;
-    private GoogleMap map;
-    private SupportMapFragment mapFragment;
-    private SlidingUpPanelLayout slidingUpPanel;
+    // Contains a list of events
+    private ListView list;
+    private int originalListHeight;
 
+    // Displays markers to show the location of each event
+    private GoogleMap map;
+    private SlidingUpPanelLayout slidingUpPanel;
     private GoogleApiClient mGoogleApiClient;
     private GeoFire geoFire;
     private GeoQuery geoQuery;
-
     private Location mLocation;
     private Circle circle;
     private HashMap<String, Marker> markers = new HashMap<>();
     private ArrayList<Event> events = new ArrayList<>();
-    private Marker mMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,24 +85,29 @@ public class MainEventActivity extends AppCompatActivity implements
                 .build();
 
         // List View
-        listView = (ListView) findViewById(R.id.eventListView);
-        listView.setOnItemClickListener(this);
+        list = (ListView) findViewById(R.id.eventListView);
+        list.setOnItemClickListener(this);
+        originalListHeight = list.getMeasuredHeight();
 
         // Map View
-        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.eventMapView);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.eventMapView);
         map = mapFragment.getMap();
         map.setMyLocationEnabled(true);
 
         // Geofire
         geoFire = new GeoFire(new Firebase("https://shared-space.firebaseio.com/geofire"));
 
-        //Sliding Up Panel Layout
+        // Sliding Up Panel Layout
         slidingUpPanel = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
         slidingUpPanel.setAnchorPoint(0.6f);
         slidingUpPanel.setClickable(true);
         slidingUpPanel.setPanelSlideListener(this);
     }
 
+    /**
+     * Initializes any objects that rely on current location information
+     * and updates them if they already exist.
+     * */
     public void setup(){
 
         // Get the users last known location (which is usually their current location)
@@ -179,7 +193,7 @@ public class MainEventActivity extends AppCompatActivity implements
     //GeoQuery method that is invoked when a key is added to the database
     @Override
     public void onKeyEntered(String key, GeoLocation location) {
-        System.out.println("KEY ENTERED!!");
+        
         // Add a new marker to the map
         final Marker marker = this.map.addMarker(new MarkerOptions()
                 .position(new LatLng(location.latitude, location.longitude)));
@@ -238,7 +252,7 @@ public class MainEventActivity extends AppCompatActivity implements
     @Override
     public void onGeoQueryReady() {
         ListAdapter adapter = new EventListAdapter(getBaseContext(), events);
-        listView.setAdapter(adapter);
+        list.setAdapter(adapter);
     }
 
     //GeoQuery method that is invoked when there is an error with the query
@@ -269,16 +283,15 @@ public class MainEventActivity extends AppCompatActivity implements
 
     @Override
     public void onPanelSlide(View panel, float slideOffset) {
-        listView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                (int) (slidingUpPanel.getHeight() * slideOffset) - 68));
+        list.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                (int) ((slidingUpPanel.getHeight() - 68) * slideOffset)));
     }
 
     @Override
     public void onPanelCollapsed(View panel) {}
 
     @Override
-    public void onPanelExpanded(View panel) {
-    }
+    public void onPanelExpanded(View panel) {}
 
     @Override
     public void onPanelAnchored(View panel) {}
@@ -288,7 +301,7 @@ public class MainEventActivity extends AppCompatActivity implements
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Event eventSelected = (Event) listView.getItemAtPosition(position);
+        Event eventSelected = (Event) list.getItemAtPosition(position);
 
         Intent intent = new Intent(this, DetailedEventActivity.class);
         intent.putExtra("Event", eventSelected);
