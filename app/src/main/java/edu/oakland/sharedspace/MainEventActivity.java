@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -42,7 +43,8 @@ public class MainEventActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         GeoQueryEventListener,
-        SlidingUpPanelLayout.PanelSlideListener{
+        SlidingUpPanelLayout.PanelSlideListener,
+        AdapterView.OnItemClickListener{
 
     final Firebase ref = new Firebase("https://shared-space.firebaseio.com");
 
@@ -67,10 +69,15 @@ public class MainEventActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main_event);
 
         // Set up the google API client
-        buildGoogleApiClient();
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
 
         // List View
         listView = (ListView) findViewById(R.id.eventListView);
+        listView.setOnItemClickListener(this);
 
         // Map View
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.eventMapView);
@@ -87,26 +94,33 @@ public class MainEventActivity extends AppCompatActivity implements
         slidingUpPanel.setPanelSlideListener(this);
     }
 
-    public void update(){
-        map.clear();
+    public void setup(){
 
-        events.clear();
+        // Get the users last known location (which is usually their current location)
         mLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        if (mLocation != null) {
-            // setup GeoFire
-            this.geoFire = new GeoFire(new Firebase("https://shared-space.firebaseio.com/geofire"));
-            GeoLocation center = new GeoLocation(mLocation.getLatitude(), mLocation.getLongitude());
-            this.geoQuery = this.geoFire.queryAtLocation(center, 1.608);
-            this.geoQuery.removeAllListeners();
-            this.geoQuery.addGeoQueryEventListener(this);
 
+        if (mLocation != null) {
+            // Setup GeoFire
+            GeoLocation center = new GeoLocation(mLocation.getLatitude(), mLocation.getLongitude());
+
+            // Setup the GeoQuery
+            if(geoQuery != null){
+                geoQuery.setCenter(center);
+            }else{
+                geoQuery = geoFire.queryAtLocation(center, 1.608);
+                geoQuery.addGeoQueryEventListener(this);
+            }
+
+            // Setup the circle
             if(circle == null){
-                this.circle = map.addCircle(new CircleOptions()
+                circle = map.addCircle(new CircleOptions()
                         .center(new LatLng(mLocation.getLatitude(), mLocation.getLongitude()))
                         .radius(1608)
                         .strokeColor(ContextCompat.getColor(this, R.color.map_circle_stroke))
                         .fillColor(ContextCompat.getColor(this, R.color.map_circle_fill))
                         .strokeWidth(5.0f));
+            }else{
+                circle.setCenter(new LatLng(mLocation.getLatitude(), mLocation.getLongitude()));
             }
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(
                     new LatLng(mLocation.getLatitude(), mLocation.getLongitude()), 14.0f));
@@ -143,19 +157,11 @@ public class MainEventActivity extends AppCompatActivity implements
         }
     }
 
-    protected synchronized void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-    }
-
     //GoogleApiClient method that is invoked when the client is connected
     @Override
     public void onConnected(Bundle bundle) {
         Log.d("GoogleApiClient", "Google API Client connected");
-        update();
+        setup();
     }
 
     //GoogleApiClient method that is invoked when the client's connection is suspended
@@ -173,11 +179,13 @@ public class MainEventActivity extends AppCompatActivity implements
     //GeoQuery method that is invoked when a key is added to the database
     @Override
     public void onKeyEntered(String key, GeoLocation location) {
+        System.out.println("KEY ENTERED!!");
         // Add a new marker to the map
         final Marker marker = this.map.addMarker(new MarkerOptions()
                 .position(new LatLng(location.latitude, location.longitude)));
         markers.put(key, marker);
 
+        // Retrieve the Event object based on its key
         Firebase eventRef = ref.child("events/" + key);
         eventRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -185,9 +193,6 @@ public class MainEventActivity extends AppCompatActivity implements
                 Event event = snapshot.getValue(Event.class);
                 events.add(event);
                 marker.setTitle(event.getTitle());
-
-                ListAdapter adapter = new EventListAdapter(getBaseContext(), events);
-                listView.setAdapter(adapter);
             }
 
             @Override
@@ -206,6 +211,21 @@ public class MainEventActivity extends AppCompatActivity implements
             marker.remove();
             this.markers.remove(key);
         }
+
+        // Retrieve the Event object based on its key, and remove it from the list
+        Firebase eventRef = ref.child("events/" + key);
+        eventRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                Event event = snapshot.getValue(Event.class);
+                events.remove(event);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
     }
 
     //GeoQuery method that is invoked when a key in the database changes
@@ -217,7 +237,8 @@ public class MainEventActivity extends AppCompatActivity implements
     //GeoQuery method that is invoked when the query is ready
     @Override
     public void onGeoQueryReady() {
-
+        ListAdapter adapter = new EventListAdapter(getBaseContext(), events);
+        listView.setAdapter(adapter);
     }
 
     //GeoQuery method that is invoked when there is an error with the query
@@ -233,19 +254,16 @@ public class MainEventActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        mGoogleApiClient.disconnect();
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        mGoogleApiClient.disconnect();
 
-        // remove all event listeners to stop updating in the background
-        if(this.geoQuery != null){
-            this.geoQuery.removeAllListeners();
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
         }
     }
 
@@ -268,4 +286,12 @@ public class MainEventActivity extends AppCompatActivity implements
     @Override
     public void onPanelHidden(View panel) {}
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Event eventSelected = (Event) listView.getItemAtPosition(position);
+
+        Intent intent = new Intent(this, DetailedEventActivity.class);
+        intent.putExtra("Event", eventSelected);
+        startActivity(intent);
+    }
 }
