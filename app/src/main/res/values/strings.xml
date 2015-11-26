@@ -35,4 +35,5 @@
 
     <string name="hint_event_date">Date</string>
     <string name="hint_event_time">Time</string>
+    <string name="title_activity_detailed_event">DetailedEventActivity</string>
 </resources>
