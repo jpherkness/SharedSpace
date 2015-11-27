@@ -2,6 +2,7 @@ package edu.oakland.sharedspace;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 
 import com.firebase.client.Firebase;
 import com.firebase.geofire.GeoFire;
@@ -20,33 +22,48 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class CreateEventActivity extends AppCompatActivity implements
         View.OnClickListener,
-        DatePickerDialog.OnDateSetListener{
+        DatePickerDialog.OnDateSetListener,
+        TimePickerDialog.OnTimeSetListener{
 
     final Firebase ref = new Firebase("https://shared-space.firebaseio.com");
 
     private static final int PLACE_PICKER_REQUEST_CODE = 1;
 
-    private EditText etTitle, etDescription, etLocation, etDate;
-    private Date date;
+    private EditText etTitle, etDescription, etLocation, etDate, etTime;
+    private GregorianCalendar eventCalendar;
     private LatLng eventLocation;
-    private List<String> tags;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
+
+        eventCalendar = new GregorianCalendar();
+
         etTitle = (EditText)findViewById(R.id.etTitle);
+
         etDescription = (EditText)findViewById(R.id.etDescription);
+
         etLocation = (EditText)findViewById(R.id.etLocation);
         etLocation.setOnClickListener(this);
-        etDate = (EditText) findViewById(R.id.etFromDate);
+
+        etDate = (EditText) findViewById(R.id.etDate);
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("EEEE, MMM d, yyyy");
+        etDate.setText(dateFormatter.format(eventCalendar.getTime()));
         etDate.setOnClickListener(this);
+
+        etTime = (EditText) findViewById(R.id.etTime);
+        SimpleDateFormat timeFormatter = new SimpleDateFormat("'at' h:mm a");
+        etTime.setText(timeFormatter.format(eventCalendar.getTime()));
+        etTime.setOnClickListener(this);
 
         // Adds a back button the the action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -74,7 +91,7 @@ public class CreateEventActivity extends AppCompatActivity implements
             String description = etDescription.getText().toString();
             GeoLocation location = new GeoLocation(eventLocation.latitude, eventLocation.longitude);
 
-            addEvent(title, description, Calendar.getInstance().getTime(), location, tags);
+            addEvent(title, description, eventCalendar.getTime(), location, null);
             finish();
         }
     }
@@ -122,6 +139,12 @@ public class CreateEventActivity extends AppCompatActivity implements
                     e.printStackTrace();
                 }
                 break;
+            case R.id.etDate:
+                pickDate();
+                break;
+            case R.id.etTime:
+                pickTime();
+                break;
         }
     }
 
@@ -166,12 +189,33 @@ public class CreateEventActivity extends AppCompatActivity implements
     }
 
     public void pickDate(){
-        DatePickerDialog datePicker = new DatePickerDialog(this, R.style.AppTheme_DialogTheme ,this, 2015, 11, 21);
+
+
+        DatePickerDialog datePicker = new DatePickerDialog(this, R.style.AppTheme_DialogTheme ,this,
+                eventCalendar.get(Calendar.YEAR), eventCalendar.get(Calendar.MONTH), eventCalendar.get(Calendar.DAY_OF_MONTH));
         datePicker.show();
+    }
+
+    public void pickTime(){
+        TimePickerDialog timePicker = new TimePickerDialog(this, R.style.AppTheme_DialogTheme, this,
+                eventCalendar.get(Calendar.HOUR_OF_DAY), eventCalendar.get(Calendar.MINUTE), false);
+        timePicker.show();
     }
 
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+        eventCalendar.set(year, monthOfYear, dayOfMonth);
 
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("EEEE, MMMM d, yyyy");
+        etDate.setText(dateFormatter.format(eventCalendar.getTime()));
+    }
+
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        eventCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        eventCalendar.set(Calendar.MINUTE, minute);
+
+        SimpleDateFormat timeFormatter = new SimpleDateFormat("'at' h:mm a");
+        etTime.setText(timeFormatter.format(eventCalendar.getTime()));
     }
 }

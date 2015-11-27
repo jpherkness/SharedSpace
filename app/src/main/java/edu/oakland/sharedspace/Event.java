@@ -15,7 +15,7 @@ import java.util.List;
  * @version     1.0 October 4, 2015
  */
 public class Event implements Serializable {
-    private final String DATE_STRING_FORMAT = "EEEE, MMM dd, yyyy HH:mm:ss";
+    private final String DATE_STRING_FORMAT = "EEEE, MMM dd, yyyy HH:mm";
 
     /**
      * Owner/Maker of the event
