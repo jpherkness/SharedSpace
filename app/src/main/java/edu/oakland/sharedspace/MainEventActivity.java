@@ -193,7 +193,7 @@ public class MainEventActivity extends AppCompatActivity implements
     //GeoQuery method that is invoked when a key is added to the database
     @Override
     public void onKeyEntered(String key, GeoLocation location) {
-        
+
         // Add a new marker to the map
         final Marker marker = this.map.addMarker(new MarkerOptions()
                 .position(new LatLng(location.latitude, location.longitude)));

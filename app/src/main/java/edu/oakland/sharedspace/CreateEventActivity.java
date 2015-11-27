@@ -22,6 +22,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class CreateEventActivity extends AppCompatActivity implements
         View.OnClickListener,
@@ -34,6 +35,7 @@ public class CreateEventActivity extends AppCompatActivity implements
     private EditText etTitle, etDescription, etLocation, etDate;
     private Date date;
     private LatLng eventLocation;
+    private List<String> tags;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +74,7 @@ public class CreateEventActivity extends AppCompatActivity implements
             String description = etDescription.getText().toString();
             GeoLocation location = new GeoLocation(eventLocation.latitude, eventLocation.longitude);
 
-            addEvent(title, description, Calendar.getInstance().getTime(), location);
+            addEvent(title, description, Calendar.getInstance().getTime(), location, tags);
             finish();
         }
     }
@@ -119,10 +121,6 @@ public class CreateEventActivity extends AppCompatActivity implements
                 } catch (GooglePlayServicesNotAvailableException e) {
                     e.printStackTrace();
                 }
-
-                break;
-            case R.id.etFromDate:
-                pickDate();
                 break;
         }
     }
@@ -145,13 +143,13 @@ public class CreateEventActivity extends AppCompatActivity implements
      *  │   │       └── 1        <- longitude
      *  │   └── bar
      */
-    public static void addEvent(String title, String description, Date date, GeoLocation location){
+    public static void addEvent(String title, String description, Date date, GeoLocation location, List<String> tags){
 
         // Create a reference to the firebase application
         Firebase ref = new Firebase("https://shared-space.firebaseio.com");
 
         // Create a event object
-        Event event = new Event(ref.getAuth().getUid(), title, description, date);
+        Event event = new Event(ref.getAuth().getUid(), title, description, date, tags);
 
         // Store the event in the database under a unique identifier (push generates that uid)
         Firebase newEventRef = ref.child("events").push();

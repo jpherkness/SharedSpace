@@ -8,6 +8,12 @@ import android.widget.TextView;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 
+/**
+ * The DetailedEventActivity displays detailed information about an event.
+ *
+ * @author      Joseph Herkness
+ * @version     1.0 November 25, 2015
+ */
 public class DetailedEventActivity extends AppCompatActivity {
 
     private Event mEvent;
