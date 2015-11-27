@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
-            android:id="@+id/etFromDate"
+            android:id="@+id/etDate"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:focusable="false"
@@ -48,7 +48,7 @@
             android:layout_weight="1"
             android:textColorHint="@color/editTextHintColor"/>
         <EditText
-            android:id="@+id/etFromTime"
+            android:id="@+id/etTime"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:focusable="false"
