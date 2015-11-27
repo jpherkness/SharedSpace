@@ -71,6 +71,7 @@
             android:layout_height="wrap_content">
 
             <edu.oakland.sharedspace.TagButton
+                android:id="@+id/btnShoppingTag"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 app:colorActive="@color/shoppingTagColor"
@@ -83,9 +84,10 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp" />
             <edu.oakland.sharedspace.TagButton
+                android:id="@+id/btnAcademicTag"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                app:colorActive="@color/educationTagColor"
+                app:colorActive="@color/academicTagColor"
                 app:colorDeactive="@color/lightGrey"
                 android:src="@drawable/ic_school_24dp"
                 android:tint="#ffffff"
@@ -95,6 +97,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp" />
             <edu.oakland.sharedspace.TagButton
+                android:id="@+id/btnSportsTag"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 app:colorActive="@color/sportsTagColor"
@@ -107,6 +110,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp" />
             <edu.oakland.sharedspace.TagButton
+                android:id="@+id/btnArtTag"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 app:colorActive="@color/artTagColor"
@@ -119,6 +123,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp" />
             <edu.oakland.sharedspace.TagButton
+                android:id="@+id/btnMusicTag"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 app:colorActive="@color/musicTagColor"

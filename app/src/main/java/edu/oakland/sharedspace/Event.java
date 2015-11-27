@@ -3,6 +3,7 @@ package edu.oakland.sharedspace;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * The Event object represents an single event.
@@ -37,6 +38,11 @@ public class Event implements Serializable {
     private String date;
 
     /**
+     * List of tags for the event.
+     */
+    private List<String> tags;
+
+    /**
      * Class constructor.
      */
     public Event(){
@@ -50,7 +56,7 @@ public class Event implements Serializable {
      * @param description  the description of the event
      * @param date  the date of the event
      * */
-    public Event(String owner, String title, String description, Date date){
+    public Event(String owner, String title, String description, Date date, List<String> tags){
         SimpleDateFormat formatter = new SimpleDateFormat(DATE_STRING_FORMAT);
 
         this.owner = owner;
@@ -59,6 +65,7 @@ public class Event implements Serializable {
         if(date != null) {
             this.date = formatter.format(date);
         }
+        this.tags = tags;
     }
 
     /**
@@ -96,5 +103,14 @@ public class Event implements Serializable {
      */
     public String getDate(){
         return date;
+    }
+
+    /**
+     * Gets a list of tags for the event
+     *
+     * @return a list of tags
+     */
+    public List<String> getTags(){
+        return tags;
     }
 }

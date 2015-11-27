@@ -19,7 +19,7 @@
     <color name="editTextHintColor">#CACCCF</color>
 
     <!-- Tag Colors -->
-    <color name="educationTagColor">#3498db</color>
+    <color name="academicTagColor">#3498db</color>
     <color name="sportsTagColor">#e74c3c</color>
     <color name="shoppingTagColor">#9b59b6</color>
     <color name="artTagColor">#f1c40f</color>
