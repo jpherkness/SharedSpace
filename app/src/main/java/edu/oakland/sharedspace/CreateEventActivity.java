@@ -172,7 +172,7 @@ public class CreateEventActivity extends AppCompatActivity implements
         Firebase ref = new Firebase("https://shared-space.firebaseio.com");
 
         // Create a event object
-        Event event = new Event(ref.getAuth().getUid(), title, description, date, tags);
+        Event event = new Event(ref.getAuth().getUid(), title, description, date, location.latitude, location.longitude);
 
         // Store the event in the database under a unique identifier (push generates that uid)
         Firebase newEventRef = ref.child("events").push();

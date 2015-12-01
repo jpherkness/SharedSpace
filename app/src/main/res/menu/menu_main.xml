@@ -3,16 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/menu_create_event"
         android:icon="@drawable/ic_add_24dp"
-        android:title="create event"
+        android:title="Create Event"
         app:showAsAction="always"/>
-    <item android:id="@+id/menu_search"
-        android:icon="@drawable/ic_search_24dp"
-        android:title="search"
-        app:showAsAction="always"/>
-    <item android:id="@+id/menu_settings"
-        android:title="settings"
-        android:showAsAction="never"/>
     <item android:id="@+id/menu_sign_out"
-        android:title="sign out"
+        android:title="Sign Out"
         app:showAsAction="never"/>
 </menu>

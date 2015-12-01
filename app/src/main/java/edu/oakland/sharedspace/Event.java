@@ -3,7 +3,6 @@ package edu.oakland.sharedspace;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 /**
  * The Event object represents an single event.
@@ -15,7 +14,6 @@ import java.util.List;
  * @version     1.0 October 4, 2015
  */
 public class Event implements Serializable {
-    private final String DATE_STRING_FORMAT = "EEEE, MMM dd, yyyy HH:mm";
 
     /**
      * Owner/Maker of the event
@@ -38,9 +36,14 @@ public class Event implements Serializable {
     private String date;
 
     /**
-     * List of tags for the event.
+     * Longitude of the event.
      */
-    private List<String> tags;
+    private Double longitude;
+
+    /**
+     * Latitude of the event.
+     */
+    private Double latitude;
 
     /**
      * Class constructor.
@@ -56,8 +59,8 @@ public class Event implements Serializable {
      * @param description  the description of the event
      * @param date  the date of the event
      * */
-    public Event(String owner, String title, String description, Date date, List<String> tags){
-        SimpleDateFormat formatter = new SimpleDateFormat(DATE_STRING_FORMAT);
+    public Event(String owner, String title, String description, Date date, Double latitude, Double longitude){
+        SimpleDateFormat formatter = new SimpleDateFormat("EEEE, MMM dd, yyyy HH:mm");
 
         this.owner = owner;
         this.title = title;
@@ -65,7 +68,8 @@ public class Event implements Serializable {
         if(date != null) {
             this.date = formatter.format(date);
         }
-        this.tags = tags;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 
     /**
@@ -99,18 +103,28 @@ public class Event implements Serializable {
     /**
      * Gets the date of the event
      *
+     * @return the latitude of the event
+     */
+    public Double getLatitude(){
+        return latitude;
+    }
+
+    /**
+     * Gets the date of the event
+     *
+     * @return the longitude of the event
+     */
+    public Double getLongitude(){
+        return longitude;
+    }
+
+
+    /**
+     * Gets the date of the event
+     *
      * @return the date of the event
      */
     public String getDate(){
         return date;
-    }
-
-    /**
-     * Gets a list of tags for the event
-     *
-     * @return a list of tags
-     */
-    public List<String> getTags(){
-        return tags;
     }
 }
